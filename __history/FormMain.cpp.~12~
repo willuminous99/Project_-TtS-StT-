@@ -1,0 +1,134 @@
+//---------------------------------------------------------------------------
+
+#include <fmx.h>
+#pragma hdrstop
+
+#include "FormMain.h"
+//---------------------------------------------------------------------------
+#pragma package(smart_init)
+#pragma resource "*.fmx"
+#pragma resource ("*.Windows.fmx", _PLAT_MSWINDOWS)
+#pragma resource ("*.Macintosh.fmx", _PLAT_MACOS)
+#pragma resource ("*.XLgXhdpiTb.fmx", _PLAT_ANDROID)
+#pragma resource ("*.SmXhdpiPh.fmx", _PLAT_ANDROID)
+#pragma resource ("*.NmXhdpiPh.fmx", _PLAT_ANDROID)
+#pragma resource ("*.LgXhdpiPh.fmx", _PLAT_ANDROID)
+#pragma resource ("*.LgXhdpiTb.fmx", _PLAT_ANDROID)
+
+TForm1 *Form1;
+
+/*void WCharToPChar(UnicodeString str, char hasil[]) {
+    unsigned int i, j;
+    i=0;
+
+	for(j=1; j<=str.Length(); j++){
+        hasil[i]=str[j];
+        i++;
+    }
+    hasil[i]=NULL;
+}*/
+//---------------------------------------------------------------------------
+__fastcall TForm1::TForm1(TComponent* Owner)
+	: TForm(Owner)
+{
+}
+//---------------------------------------------------------------------------
+void __fastcall TForm1::BtnFindClick(TObject *Sender)
+{
+	bool Found;
+	int l;
+
+	/*WCharToPChar(TxtSearchWord->Text, FindWord);
+	f=fopen("D:\\Source Code\\SimpleWordlists-master\\Wordlist-Verbs-All.txt", "rt");
+	if (f) {
+		Found=false;
+		while (!feof(f)) {
+			fgets(ReadWord, 15, f);
+			l=strlen(ReadWord)-1;
+			ReadWord[l]=0;
+			strcpy(SmallWord, ReadWord);
+			strlwr(SmallWord);
+
+			if(strcmp(FindWord, SmallWord)==0) Found=true;
+		}
+
+		fclose(f);
+		if(Found)
+			LblResult->Text="That word is a verb";
+		else LblResult->Text="That word is not a verb";
+	}
+	else LblResult->Text="Cannot open verb database";*/
+
+	struct KosaKata{
+		char Kata[20];
+		KosaKata *Next;
+	} *KataGanti, *KataKerja, *KataBenda, *tGanti, *tKerja, *tBenda, *Head, *Tail, *Baru, *Hapus, *Bantu;
+
+	void TForm1::Pisahkan(char kalimat[], tKata kata, int &jlh){
+		int i, j, k;
+		char huruf;
+
+		i=0;
+		jlh=1;
+		while (kalimat[i]){
+			huruf=kalimat[i];
+			if (!((huruf>='A' && huruf<='Z') || (huruf>='a' && huruf<='z') || (huruf>='0' && huruf<='9')))
+				jlh++;
+				i++;
+		}
+
+		*kata=new (char *)[jlh];
+		for(i=0; i<jlh; i++)
+			kata[i]=new char[jlh];
+
+		i=j=k=0;
+		while(kalimat[i]){
+			huruf=kalimat[i];
+			if ((huruf>='A' && juruf<='2') || (huruf>='a' && huruf<='z') || (huruf>='0' && huruf<='9')) {
+				kata[k][j]=kalimat[i];
+				j++;
+			}
+			else {
+				if (j>0) {
+					kata[k][j]=0;
+					j=0;
+					k++;
+				}
+			}
+			i++;
+		}
+		if (j>0) kata[k][j]=0;
+	}
+
+	KosaKata *BacaDaftarKata(char NamaFile[]){
+		FILE *f;
+		static char kata[20];
+		int p;
+
+		Head=Tail=NULL;
+		f=fopen(NamaFile, "rt");
+		if(f) {
+			while (!feof(f)){
+				fgets(kata, 20, f);
+				p=strlen(kata)-1;
+				if (kata[p]=='\n')
+					kata[p]=0;
+
+				Baru=new KosaKata;
+				strcpy(Baru->Kata, kata);
+				Baru->Next=NULL;
+
+				if(Head){
+					Tail->Next=Baru;
+					Tail=Baru;
+				}
+				else Head=Tail=Baru;
+			}
+			fclose(f);
+			return Head;
+		}
+        else return NULL;
+	}
+
+}
+//---------------------------------------------------------------------------

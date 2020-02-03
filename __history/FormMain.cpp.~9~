@@ -1,0 +1,62 @@
+//---------------------------------------------------------------------------
+
+#include <fmx.h>
+#pragma hdrstop
+
+#include "FormMain.h"
+//---------------------------------------------------------------------------
+#pragma package(smart_init)
+#pragma resource "*.fmx"
+#pragma resource ("*.Windows.fmx", _PLAT_MSWINDOWS)
+#pragma resource ("*.Macintosh.fmx", _PLAT_MACOS)
+#pragma resource ("*.XLgXhdpiTb.fmx", _PLAT_ANDROID)
+#pragma resource ("*.SmXhdpiPh.fmx", _PLAT_ANDROID)
+#pragma resource ("*.NmXhdpiPh.fmx", _PLAT_ANDROID)
+#pragma resource ("*.LgXhdpiPh.fmx", _PLAT_ANDROID)
+#pragma resource ("*.LgXhdpiTb.fmx", _PLAT_ANDROID)
+
+TForm1 *Form1;
+
+void WCharToPChar(UnicodeString str, char hasil[]) {
+    unsigned int i, j;
+    i=0;
+
+    for(j=1; j<=str.Length(); j++){
+        hasil[i]=str[j];
+        i++;
+    }
+    hasil[i]=NULL;
+}
+//---------------------------------------------------------------------------
+__fastcall TForm1::TForm1(TComponent* Owner)
+	: TForm(Owner)
+{
+}
+//---------------------------------------------------------------------------
+void __fastcall TForm1::BtnFindClick(TObject *Sender)
+{
+	bool Found;
+	int l;
+
+	WCharToPChar(TxtSearchWord->Text, FindWord);
+	f=fopen("D:\\Source Code\\SimpleWordlists-master\\Wordlist-Verbs-All", "rt");
+	if (f) {
+		Found=false;
+		while (!feof(f)) {
+			fgets(ReadWord, 15, f);
+			l=strlen(ReadWord)-1;
+			ReadWord[l]=0;
+			strcpy(SmallWord, ReadWord);
+			strlwr(SmallWord);
+
+			if(strcmp(FindWord, SmallWord)==0) Found=true;
+		}
+
+		fclose(f);
+		if(Found)
+			LblResult->Text="That word is a verb";
+		else LblResult->Text="That word is not a verb";
+	}
+	else LblResult->Text="Cannot open verb database";
+}
+//---------------------------------------------------------------------------

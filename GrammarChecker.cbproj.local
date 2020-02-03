@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<BorlandProject>
+	<Transactions>
+    <Transaction>2020/01/20 15:42:59.000.614,=C:\Users\Asus\Documents\Embarcadero\Studio\Projects\Unit1.cpp</Transaction>
+    <Transaction>2020/01/20 15:43:03.000.668,=C:\Users\Asus\Documents\Embarcadero\Studio\Projects\Project1PCH1.h</Transaction>
+    <Transaction>2020/01/20 16:03:39.000.365,C:\Users\Asus\Documents\Embarcadero\Studio\Projects\Unit1.cpp=D:\GrammerCheckerRad\FormMain.cpp</Transaction>
+    <Transaction>2020/01/20 16:03:39.000.365,C:\Users\Asus\Documents\Embarcadero\Studio\Projects\Unit1.fmx=D:\GrammerCheckerRad\FormMain.fmx</Transaction>
+    <Transaction>2020/01/20 16:03:39.000.365,C:\Users\Asus\Documents\Embarcadero\Studio\Projects\Unit1.h=D:\GrammerCheckerRad\FormMain.h</Transaction>
+    <Transaction>2020/01/20 16:03:48.000.187,C:\Users\Asus\Documents\Embarcadero\Studio\Projects\Project1PCH1.h=D:\GrammerCheckerRad\Header.h</Transaction>
+    <Transaction>2020/01/20 16:04:03.000.353,C:\Users\Asus\Documents\Embarcadero\Studio\Projects\Project1.cbproj=D:\GrammerCheckerRad\GrammarChecker.cbproj</Transaction>
+  </Transactions>
+</BorlandProject>

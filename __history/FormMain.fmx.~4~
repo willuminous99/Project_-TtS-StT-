@@ -1,0 +1,39 @@
+object Form1: TForm1
+  Left = 0
+  Top = 0
+  Caption = 'Form1'
+  ClientHeight = 480
+  ClientWidth = 640
+  FormFactor.Width = 320
+  FormFactor.Height = 480
+  FormFactor.Devices = [Desktop]
+  DesignerMasterStyle = 0
+  object Label1: TLabel
+    Position.X = 16.000000000000000000
+    Position.Y = 16.000000000000000000
+    Text = 'Please enter a word'
+    TabOrder = 0
+  end
+  object TxtSearchWord: TEdit
+    Touch.InteractiveGestures = [LongTap, DoubleTap]
+    TabOrder = 1
+    Position.X = 136.000000000000000000
+    Position.Y = 16.000000000000000000
+  end
+  object BtnFind: TButton
+    Position.X = 240.000000000000000000
+    Position.Y = 16.000000000000000000
+    TabOrder = 2
+    Text = 'Find'
+    OnClick = BtnFindClick
+  end
+  object LblResult: TLabel
+    Position.X = 16.000000000000000000
+    Position.Y = 56.000000000000000000
+    Size.Width = 305.000000000000000000
+    Size.Height = 17.000000000000000000
+    Size.PlatformDefault = False
+    Text = 'LblResult'
+    TabOrder = 3
+  end
+end
